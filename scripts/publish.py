@@ -68,19 +68,14 @@ def main():
     for file in ['dist/index.html', 'dist/catalog.js']:
         path = ROOT / file
         path.write_text(path.read_text(encoding='utf-8').replace(local, remote), encoding='utf-8')
-    if not (ROOT / '.git').exists(): git('init', '-b', 'main')
-    if not git('config', 'user.name'): git('config', 'user.name', OWNER)
-    if not git('config', 'user.email'): git('config', 'user.email', f"{me['id']}+{OWNER}@users.noreply.github.com")
-    if not git('remote'): git('remote', 'add', 'origin', repo['clone_url'])
-    if git('remote', 'get-url', 'origin') != repo['clone_url']: raise RuntimeError('Unexpected Git remote; refusing to push.')
-    git('add', '--all')
-    if git('status', '--porcelain'): git('commit', '-m', 'Build IkeyWorld game catalog and Windows demo download')
-    git('push', '-u', 'origin', 'main')
     try: pages = api('GET', f'/repos/{OWNER}/{REPO}/pages')
     except urllib.error.HTTPError as error:
         if error.code != 404: raise
         pages = api('POST', f'/repos/{OWNER}/{REPO}/pages', {'build_type': 'workflow'})
     if pages.get('build_type') != 'workflow': api('PUT', f'/repos/{OWNER}/{REPO}/pages', {'build_type': 'workflow'})
+    git('add', '--all')
+    if git('status', '--porcelain'): git('commit', '-m', 'Build IkeyWorld game catalog and Windows demo download')
+    git('push', '-u', 'origin', 'main')
     print(json.dumps({'repository': repo['html_url'], 'release': release['html_url'], 'download': remote, 'site': pages.get('html_url', f'https://{OWNER}.github.io/{REPO}/')}, ensure_ascii=False))
     return 0
 
