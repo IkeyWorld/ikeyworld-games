@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142a39">
+  <meta name="description" content="Небольшие игры, большие истории. Скачайте бесплатную Windows-демоверсию «Театр забытых судеб»: 20 историй на страницах рисованной книги.">
+  <meta property="og:title" content="IkeyWorld — игры с историей">
+  <meta property="og:description" content="Театр забытых судеб. Иллюстрированная головоломка, в которой ты решаешь, чем закончится сказка.">
+  <title>IkeyWorld — игры с историей</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="catalog.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержимому</a>
+<header class="header wrap">
+  <a class="wordmark" href="#" aria-label="IkeyWorld — главная"><span class="brand-star" aria-hidden="true">✳</span> IKEY<span>WORLD</span><i>маленький мир игр</i></a>
+  <nav aria-label="Основная навигация"><a href="#games">Игры</a><a href="#about">О проекте</a><a class="nav-download" href="#download">Скачать демо <span aria-hidden="true">↗</span></a></nav>
+</header>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy"><p class="eyebrow"><span></span> Независимые игры · сделано с воображением</p>
+      <h1 id="hero-title">У каждой сказки<br>может быть<br><em>твой финал.</em></h1>
+      <p class="lead">Здесь живут игры, в которых хочется задержаться.<br>Первая история уже ждёт на страницах книги.</p>
+      <a class="button gold" href="#games">Открыть коллекцию <span aria-hidden="true">↓</span></a>
+      <p class="hero-note">Одна игра сейчас. Больше миров — впереди.</p>
+    </div>
+    <div class="hero-art" aria-label="Герои Театра забытых судеб">
+      <div class="art-orbit" aria-hidden="true"></div><span class="art-star star-one" aria-hidden="true">✧</span><span class="art-star star-two" aria-hidden="true">✧</span>
+      <span class="art-caption">Всё начинается<br>с одной розы…</span>
+      <img class="hero-prince" src="assets/prince.png" alt="Принц в синем плаще" fetchpriority="high">
+      <img class="hero-princess" src="assets/princess.png" alt="Принцесса в розовом платье" fetchpriority="high">
+      <div class="art-label"><span>Первая игра коллекции</span><strong>Театр забытых судеб</strong><small>Открой книгу. Измени историю.</small></div>
+    </div>
+  </section>
+  <div class="ribbon" aria-hidden="true"><span>Немного магии</span> ✦ <span>Много историй</span> ✦ <span>Твой ход — твой финал</span> ✦ <span>Немного магии</span> ✦ <span>Много историй</span></div>
+  <section id="games" class="collection paper-section" aria-labelledby="games-title">
+    <div class="wrap"><div class="section-top"><div><p class="eyebrow ink">Полка с играми</p><h2 id="games-title">Во что сыграем?</h2></div><span class="collection-count">Коллекция / 01</span></div>
+      <div id="catalog"></div>
+      <noscript><article class="game-card"><h3>Театр забытых судеб</h3><p>Бесплатная демоверсия для Windows · 20 историй.</p><a href="downloads/Teatr_Zabytyh_Sudeb_v0.8.1_Windows.zip" download>Скачать демоверсию · 66,7 МБ</a></article></noscript>
+      <div class="next-story"><span aria-hidden="true">✧</span><p>На этой полке ещё есть место.<small>Новые игры появятся здесь, когда будут готовы.</small></p><span class="dashed-line" aria-hidden="true"></span><span class="tiny-book" aria-hidden="true">II</span></div>
+    </div>
+  </section>
+  <section class="how wrap" aria-labelledby="how-title"><div class="how-heading"><p class="eyebrow">Маленький театр. Большие последствия.</p><h2 id="how-title">Один жест —<br><em>другая история.</em></h2><p>Ты не выбираешь реплику из списка.<br>Ты собираешь саму сказку.</p></div><div class="steps"><article><span>01</span><div><h3>Выбери место встречи</h3><p>Дворец, сад или сцена: у каждого места свой характер.</p></div></article><article><span>02</span><div><h3>Познакомь героев</h3><p>Подари розу, доверь тайну — и посмотри, что случится дальше.</p></div></article><article><span>03</span><div><h3>Найди нужный финал</h3><p>Меняй встречи и замечай, как одна деталь меняет всё.</p></div></article></div></section>
+  <section class="gallery paper-section" aria-labelledby="gallery-title"><div class="wrap"><div class="section-top"><div><p class="eyebrow ink">Загляни внутрь</p><h2 id="gallery-title">Сказка в деталях</h2></div><span class="hand-note">Настоящие страницы из игры ↙</span></div><div class="gallery-grid"><button class="shot" data-image="assets/story.png" data-caption="Роза, которая меняет историю" aria-label="Увеличить: Роза, которая меняет историю"><img src="assets/story.png" alt="Три встречи героев на страницах открытой книги" loading="lazy" width="1920" height="1080"><span>Роза, которая меняет историю <b aria-hidden="true">↗</b></span></button><button class="shot" data-image="assets/masks.png" data-caption="У каждого героя есть свои секреты" aria-label="Увеличить: У каждого героя есть свои секреты"><img src="assets/masks.png" alt="Придворные интриги и маски в иллюстрированной книге" loading="lazy" width="1280" height="720"><span>У каждого героя есть свои секреты <b aria-hidden="true">↗</b></span></button></div></div></section>
+  <section id="download" class="download wrap" aria-labelledby="download-title"><div><p class="eyebrow">Книга уже открыта</p><h2 id="download-title">Твоя история<br><em>начинается здесь.</em></h2><p>20 историй. Четыре главы. Одна необычная книга.<br>Скачай бесплатное демо и познакомься с нашим театром.</p><a id="main-download" class="button gold" href="downloads/Teatr_Zabytyh_Sudeb_v0.8.1_Windows.zip" download>Скачать демоверсию <span aria-hidden="true">↓</span></a><p class="download-meta">Windows · 64 бит <span>·</span> ZIP · 66,7 МБ <span>·</span> Версия 0.8.1</p></div><aside class="install-card"><span class="paper-pin" aria-hidden="true">✦</span><h3>Как открыть книгу</h3><ol><li>Скачай архив с игрой.</li><li>Распакуй его целиком в отдельную папку.</li><li>Запусти <code>TeatrZabytyhSudeb.exe</code>.</li></ol><p>Файл <code>.pck</code> должен остаться рядом с игрой. Установка не требуется.</p><details><summary>Проверить скачанный файл</summary><p>SHA-256 архива:</p><code class="checksum">c08a090b82e7677fc799fa1fe80f82d357e9967a597b522dad7f80b4a7debee6</code></details></aside></section>
+  <section id="about" class="about paper-section"><div class="wrap about-inner"><span class="about-symbol" aria-hidden="true">✳</span><div><p class="eyebrow ink">О проекте</p><h2>Маленькие миры,<br>которые хочется открывать.</h2></div><div><p>IkeyWorld — место для наших игр. Начинаем с «Театра забытых судеб»: уютной головоломки о героях, случайных встречах и неожиданных последствиях.</p><p>Сейчас доступна бесплатная демоверсия. Со временем здесь появятся новые истории и новые игры.</p></div></div></section>
+</main>
+<footer class="wrap footer"><a class="wordmark" href="#">✳ IKEY<span>WORLD</span></a><p>Игры с историей. И место для новых.</p><a href="#download">Скачать демо ↗</a></footer>
+<dialog id="lightbox" aria-label="Скриншот игры"><button class="close" aria-label="Закрыть скриншот">×</button><img alt=""><p></p></dialog>
+</body></html>
