@@ -11,7 +11,7 @@ window.GAME_CATALOG = [
     platform: 'Windows · 64 бит',
     size: '66,7 МБ',
     price: 'Бесплатная демоверсия',
-    download: 'downloads/Teatr_Zabytyh_Sudeb_v0.8.1_Windows.zip',
+    download: 'https://github.com/IkeyWorld/ikeyworld-games/releases/download/demo-v0.8.1/Teatr_Zabytyh_Sudeb_v0.8.1_Windows.zip',
     sha256: 'c08a090b82e7677fc799fa1fe80f82d357e9967a597b522dad7f80b4a7debee6'
   }
 ];
