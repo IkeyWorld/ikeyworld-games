@@ -7,10 +7,10 @@ import re
 ROOT = Path(__file__).resolve().parents[1] / 'dist'
 class Page(HTMLParser):
     def __init__(self):
-        super().__init__(); self.urls = []; self.ids = set(); self.images = []
+        super().__init__(); self.urls = []; self.ids = []; self.images = []
     def handle_starttag(self, tag, attrs):
         attr = dict(attrs)
-        if 'id' in attr: self.ids.add(attr['id'])
+        if 'id' in attr: self.ids.append(attr['id'])
         for key in ['href', 'src', 'data-image']:
             if attr.get(key): self.urls.append(attr[key])
         if tag == 'img': self.images.append(attr)

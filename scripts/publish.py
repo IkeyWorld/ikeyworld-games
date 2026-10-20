@@ -62,6 +62,7 @@ def main():
         url = release['upload_url'].split('{')[0] + '?name=' + ARCHIVE.name
         asset = api('POST', url, binary=ARCHIVE.read_bytes())
     if asset['size'] != ARCHIVE.stat().st_size: raise RuntimeError('Release asset has the wrong size.')
+    if asset.get('digest') and asset['digest'] != 'sha256:' + EXPECTED: raise RuntimeError('Release asset has the wrong checksum.')
     local = 'downloads/' + ARCHIVE.name
     remote = asset['browser_download_url']
     for file in ['dist/index.html', 'dist/catalog.js']:

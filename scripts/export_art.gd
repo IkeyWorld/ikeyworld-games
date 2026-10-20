@@ -1,7 +1,12 @@
 extends SceneTree
 func _initialize() -> void:
-    var base = "C:/Users/QQTGM/OneDrive/Documents/ChatGPT/Happy End Continuie/storybook_v081/Teatr_Zabytyh_Sudeb_Godot4/"
-    var output = "C:/Users/QQTGM/OneDrive/Documents/ChatGPT/Happy End Continuie/games-site/dist/assets/"
+    var args = OS.get_cmdline_user_args()
+    if args.size() != 2:
+        push_error("Usage: Godot --headless --script export_art.gd -- <game-project-directory> <output-directory>")
+        quit(1)
+        return
+    var base = args[0].trim_suffix("/") + "/"
+    var output = args[1].trim_suffix("/") + "/"
     var catalog = JSON.parse_string(FileAccess.get_file_as_string(base + "data/ink_asset_regions.json"))
     for actor in ["prince", "princess", "jester", "intriguer"]:
         var entry = catalog[actor + "|idle"]
