@@ -1,17 +1,61 @@
-// Add future games here. Paths are relative so GitHub Pages project URLs work.
-window.GAME_CATALOG = [
+// Only list real projects. Download links must point to a verified published build.
+// The public site must never pretend that an unavailable game can be downloaded.
+window.PUNKPORT_GAMES = Object.freeze([
   {
-    id: 'forgotten-fates',
-    title: 'Театр забытых судеб',
-    genre: 'Истории, которые складываешь ты',
-    tags: ['Головоломка', '20 историй', 'На русском'],
-    description: 'Роза, тайна и немного придворных интриг. Расставляй героев на страницах книги, меняй порядок встреч и находи свой путь к нужному финалу.',
-    image: 'assets/story.png',
-    version: '0.8.1',
-    platform: 'Windows · 64 бит',
-    size: '66,7 МБ',
-    price: 'Бесплатная демоверсия',
-    download: 'https://github.com/IkeyWorld/ikeyworld-games/releases/download/demo-v0.8.1/Teatr_Zabytyh_Sudeb_v0.8.1_Windows.zip',
-    sha256: 'c08a090b82e7677fc799fa1fe80f82d357e9967a597b522dad7f80b4a7debee6'
+    id: "chibi-fantasy-rpg",
+    name: "Chibi Fantasy RPG",
+    kicker: "КОМАНДНОЕ ПРИКЛЮЧЕНИЕ",
+    short: "Собери отряд и отправься в мир подземелий, тайн и невероятных сражений.",
+    description: "Кооперативная фэнтезийная RPG с классами, прокачкой и путешествиями по случайным подземельям. Проект находится в разработке; публичная сборка пока не опубликована.",
+    category: "rpg",
+    genre: "Кооперативная RPG",
+    tags: ["RPG", "Приключения", "Кооператив в разработке"],
+    theme: "fantasy",
+    symbol: "✦",
+    status: "development",
+    platform: "Windows (планируется)",
+    players: "1–4 (планируется)",
+    download: null,
+    version: null,
+    features: ["6 базовых классов", "Случайные подземелья", "Командные приключения"],
+    featured: true
+  },
+  {
+    id: "cleaning-tech",
+    name: "Cleaning Tech Incremental",
+    kicker: "МАЛЕНЬКИЕ ШАГИ. БОЛЬШОЙ ПРОГРЕСС.",
+    short: "Очищай устройства, собирай улучшения и превращай простую работу в технологическую империю.",
+    description: "Двухмерный инкрементальный симулятор чистки техники с прокачкой, новыми устройствами и постепенным открытием механик. Проект в разработке.",
+    category: "sim",
+    genre: "Инкрементальный симулятор",
+    tags: ["Симулятор", "2D", "Прокачка"],
+    theme: "tech",
+    symbol: "⌘",
+    status: "development",
+    platform: "Windows (планируется)",
+    players: "1 игрок",
+    download: null,
+    version: null,
+    features: ["Чистка устройств", "Дерево улучшений", "Престиж и прогресс"],
+    featured: false
+  },
+  {
+    id: "mineterrascrap",
+    name: "MineTerraScrap",
+    kicker: "СОЗДАВАЙ БЕЗ ОГРАНИЧЕНИЙ",
+    short: "Строй невероятные механизмы и экспериментируй в свободной трёхмерной песочнице.",
+    description: "Экспериментальная 3D-песочница о строительстве, механизмах и творчестве. Основной акцент — свобода без обязательных заданий. Проект находится в разработке.",
+    category: "sandbox",
+    genre: "Креативная песочница",
+    tags: ["Песочница", "3D", "Строительство"],
+    theme: "sandbox",
+    symbol: "⬡",
+    status: "development",
+    platform: "Windows (планируется)",
+    players: "Уточняется",
+    download: null,
+    version: null,
+    features: ["Модульное строительство", "Механизмы и транспорт", "Свободный креатив"],
+    featured: false
   }
-];
+]);

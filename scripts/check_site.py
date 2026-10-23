@@ -1,37 +1,60 @@
-"""Check static resources and anchors without dependencies or executing site code."""
+"""Lightweight static site checks for PunkPort."""
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlparse, unquote
+from urllib.parse import unquote, urlparse
 import re
+import sys
 
-ROOT = Path(__file__).resolve().parents[1] / 'dist'
-class Page(HTMLParser):
+ROOT = Path(__file__).resolve().parents[1]
+DIST = ROOT / "dist"
+class Parser(HTMLParser):
     def __init__(self):
-        super().__init__(); self.urls = []; self.ids = []; self.images = []
+        super().__init__()
+        self.ids = []
+        self.urls = []
+        self.images = []
     def handle_starttag(self, tag, attrs):
         attr = dict(attrs)
-        if 'id' in attr: self.ids.append(attr['id'])
-        for key in ['href', 'src', 'data-image']:
-            if attr.get(key): self.urls.append(attr[key])
-        if tag == 'img': self.images.append(attr)
+        if attr.get("id"):
+            self.ids.append(attr["id"])
+        for field in ("href", "src"):
+            if attr.get(field):
+                self.urls.append(attr[field])
+        if tag == "img":
+            self.images.append(attr)
 
-page = Page(); page.feed((ROOT / 'index.html').read_text(encoding='utf-8'))
+page = (DIST / "index.html").read_text(encoding="utf8")
+parsed = Parser()
+parsed.feed(page)
 errors = []
-for url in page.urls:
-    parsed = urlparse(url)
-    if parsed.scheme: continue
-    if parsed.path:
-        target = (ROOT / unquote(parsed.path)).resolve()
-        if not target.is_relative_to(ROOT.resolve()) or not target.is_file(): errors.append('Missing resource: ' + url)
-    if parsed.fragment and parsed.fragment not in page.ids: errors.append('Missing anchor: ' + url)
-for image in page.images:
-    if 'alt' not in image: errors.append('Missing image description')
-for asset in re.findall(r"url\(['\"]?([^)'\"]+)", (ROOT / 'style.css').read_text(encoding='utf-8')):
-    if not (ROOT / asset).is_file(): errors.append('Missing CSS resource: ' + asset)
-catalog = (ROOT / 'catalog.js').read_text(encoding='utf-8')
-for path in re.findall(r"(?:image|download):\s*'([^']+)'", catalog):
-    if not urlparse(path).scheme and not (ROOT / path).is_file(): errors.append('Missing catalog asset: ' + path)
-assert not errors, '\n'.join(errors)
-assert len(page.ids) == len(set(page.ids))
-assert 'lang="ru"' in (ROOT / 'index.html').read_text(encoding='utf-8')
-print(f'PASS: {len(page.urls)} resources/links, {len(page.images)} accessible images, all CSS and catalog paths.')
+for url in parsed.urls:
+    parts = urlparse(url)
+    if parts.scheme or url.startswith("//") or url.startswith("#") or url.startswith("mailto:"):
+        if parts.fragment and not parts.path and parts.fragment not in parsed.ids:
+            errors.append("Missing anchor: " + url)
+        continue
+    if parts.path:
+        file = (DIST / unquote(parts.path)).resolve()
+        if not file.is_relative_to(DIST.resolve()) or not file.is_file():
+            errors.append("Missing local resource: " + url)
+for image in parsed.images:
+    if "alt" not in image:
+        errors.append("Image missing alt attribute: " + repr(image))
+if len(parsed.ids) != len(set(parsed.ids)):
+    errors.append("Duplicate id in HTML")
+if '<html lang="ru">' not in page:
+    errors.append("Set Russian page language")
+if "Театр забытых судеб" in "".join(p.read_text(encoding="utf8",errors="ignore") for p in DIST.rglob("*") if p.is_file()):
+    errors.append("Removed game's content still present")
+for name in ("index.html", "style.css", "catalog.js", "app.js", "assets/favicon.svg", "assets/social.svg", ".nojekyll"):
+    if not (DIST / name).is_file():
+        errors.append("Missing required file: " + name)
+catalog = (DIST / "catalog.js").read_text(encoding="utf8")
+for field in ("window.PUNKPORT_GAMES", "status:", "download:"):
+    if field not in catalog:
+        errors.append("Missing catalog field: " + field)
+if not errors:
+    print(f"PASS PunkPort — {len(parsed.ids)} ids, {len(parsed.urls)} references, {len(list(DIST.rglob('*')))} assets/directories")
+else:
+    print("\n".join("FAIL " + error for error in errors), file=sys.stderr)
+    raise SystemExit(1)

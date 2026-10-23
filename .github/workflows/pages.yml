@@ -1,4 +1,4 @@
-name: Publish game catalog
+name: Deploy PunkPort to GitHub Pages
 on:
   push:
     branches: [main]
@@ -8,7 +8,7 @@ permissions:
   pages: write
   id-token: write
 concurrency:
-  group: pages
+  group: punkport-pages
   cancel-in-progress: true
 jobs:
   deploy:
@@ -18,8 +18,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Validate static files
-        run: python3 scripts/check_site.py
+      - name: Validate HTML, assets and catalog
+        run: |
+          python3 scripts/check_site.py
+          node --check dist/app.js
+          node --check dist/catalog.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
