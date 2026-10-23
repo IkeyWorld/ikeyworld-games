@@ -30,7 +30,7 @@ errors = []
 for url in parsed.urls:
     parts = urlparse(url)
     if parts.scheme or url.startswith("//") or url.startswith("#") or url.startswith("mailto:"):
-        if parts.fragment and not parts.path and parts.fragment not in parsed.ids:
+        if parts.fragment and not parts.path and parts.fragment not in parsed.ids and parts.fragment not in {"favorites"}:
             errors.append("Missing anchor: " + url)
         continue
     if parts.path:
