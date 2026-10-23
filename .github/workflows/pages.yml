@@ -20,6 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate HTML, assets and catalog
         run: |
+          python3 scripts/embed_css.py
           python3 scripts/check_site.py
           node --check dist/app.js
           node --check dist/catalog.js
