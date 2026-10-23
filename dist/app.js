@@ -33,12 +33,11 @@
   };
   const statusLabel = game => available(game) ? "ДОСТУПНА" : "В РАЗРАБОТКЕ";
   const poster = (game, large = false) => `
-    <div class="game-poster poster-${escapeHtml(game.theme)} ${large ? "poster-large" : ""}" aria-hidden="true">
-      <div class="poster-stars"></div><div class="poster-halo"></div>
-      <div class="poster-center">${escapeHtml(game.symbol)}</div>
-      <div class="poster-lines"></div>
-      <span class="poster-wordmark">PUNKPORT ORIGINAL</span>
-      <span class="poster-corner">↗</span>
+    <div class="game-poster poster-${escapeHtml(game.theme)} ${large ? "poster-large" : ""}">
+      <img src="${escapeHtml(game.cover)}" loading="${large ? "eager" : "lazy"}" alt="Концептуальная иллюстрация проекта ${escapeHtml(game.name)}">
+      <div class="poster-shade"></div>
+      <span class="poster-wordmark">PUNKPORT / ORIGINAL</span>
+      <span class="poster-corner" aria-hidden="true">↗</span>
     </div>`;
   const card = game => `
     <article class="game-card" aria-label="${escapeHtml(game.name)}">
