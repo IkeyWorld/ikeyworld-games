@@ -42,6 +42,8 @@ for image in parsed.images:
         errors.append("Image missing alt attribute: " + repr(image))
 if len(parsed.ids) != len(set(parsed.ids)):
     errors.append("Duplicate id in HTML")
+if '<style id="punkport-styles">' not in page or ".sidebar{" not in page or ".hero{" not in page:
+    errors.append("Critical page CSS not inlined")
 if '<html lang="ru">' not in page:
     errors.append("Set Russian page language")
 if "Театр забытых судеб" in "".join(p.read_text(encoding="utf8",errors="ignore") for p in DIST.rglob("*") if p.is_file()):
