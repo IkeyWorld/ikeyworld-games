@@ -1,8 +1,10 @@
 .DS_Store
 Thumbs.db
-__pycache__/
-*.log
-*.tmp
-artifacts/
-# Keep release binaries out of Git history. The publishing script uploads them to Releases.
-dist/downloads/*.zip
+node_modules/
+.env
+.env.*
+!.env.example
+dist/downloads/
+*.zip
+*.exe
+*.pck
